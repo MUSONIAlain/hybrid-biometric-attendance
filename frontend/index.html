@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Attendance6 Dashboard</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="topbar">
+    <div>
+      <p class="eyebrow">ESP32 Attendance System</p>
+      <h1>Attendance6 Dashboard</h1>
+    </div>
+    <div class="status-pill" id="serverStatus">Checking server...</div>
+  </header>
+
+  <main class="layout">
+    <section class="panel">
+      <div class="panel-heading">
+        <div>
+          <h2>Register User</h2>
+          <p>Enter a name, then use the ESP32 to scan fingerprint and RFID.</p>
+        </div>
+      </div>
+
+      <form id="registrationForm" class="form-row">
+        <input id="nameInput" type="text" placeholder="Student name" autocomplete="off" required>
+        <button type="submit">Start Registration</button>
+      </form>
+
+      <div class="notice" id="registrationStatus">No active registration.</div>
+    </section>
+
+    <section class="panel settings-panel">
+      <div>
+        <h2>Biometrics Mode</h2>
+        <p>When enabled, attendance requires both RFID and fingerprint.</p>
+      </div>
+      <label class="switch">
+        <input type="checkbox" id="biometricsToggle">
+        <span class="slider"></span>
+        <span id="biometricsLabel">Loading...</span>
+      </label>
+    </section>
+
+    <section class="panel wide">
+      <div class="panel-heading">
+        <div>
+          <h2>Users</h2>
+          <p>Registered RFID cards and fingerprint IDs.</p>
+        </div>
+        <button class="secondary" id="refreshUsers">Refresh</button>
+      </div>
+
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Fingerprint ID</th>
+              <th>RFID UID</th>
+              <th>Registered</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody id="usersBody"></tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="panel wide">
+      <div class="panel-heading">
+        <div>
+          <h2>Attendance Logs</h2>
+          <p>Latest attendance attempts and their result.</p>
+        </div>
+        <div class="actions">
+          <button class="secondary" id="refreshLogs">Refresh</button>
+          <a class="button-link" href="/api/attendance/export">Export CSV</a>
+        </div>
+      </div>
+
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>RFID UID</th>
+              <th>Fingerprint ID</th>
+              <th>Status</th>
+              <th>Message</th>
+              <th>Time</th>
+            </tr>
+          </thead>
+          <tbody id="logsBody"></tbody>
+        </table>
+      </div>
+    </section>
+  </main>
+
+  <script src="app.js"></script>
+</body>
+</html>
